@@ -30,10 +30,10 @@
 ### 1️⃣ 환경 구축
 
 #### 🖥️ 1. VirtualBox Network 설정
-- **설정 > 네트워크 > 어댑터를 브릿지 모드로 설정**
+- **설정 > 네트워크 > 어댑터에 브릿지 모드로 설정**
 - **어댑터 브릿지 모드(Adaptor Bridge Mode)란?**
-  - 공유기로부터 가상머신이 IP 주소를 할당받아 호스트 PC와 동일한 네트워크 대역의 IP 주소로 통신 가능
-  - 가상머신이 독립된 장치처럼 동작하며 물리적 네트워크 장치와 직접 통신 가능
+  - **공유기로부터 가상머신이 IP 주소를 할당**받아 **호스트 PC와 동일한 네트워크 대역의 IP 주소로 통신 가능**
+  - 외부와 연결되는 네트워크를 구축할 땐 NAT보다 Bridged Adapter가 더 간편하며, 가상머신이 독립된 장치처럼 동작하여 물리적 네트워크 장치와 직접 통신 가능
   <p align="center">
     <img src="https://github.com/user-attachments/assets/258ffda3-7d76-4c73-81cf-2873e6d44d7f" alt="VirtualBox Network 설정" width="70%">
 </p>
@@ -66,17 +66,17 @@
 - **활용 목적** : 다양한 환경(SQL, Python, Java 등)에서 주로 문자열 데이터의 패턴을 정의하여 효율적으로 처리할 수 있도록 도와줌
 
 #### 📌 2. 자주 활용되는 표현식 및 활용법
-**2.1 기본 문법**
+- **2.1 기본 문법**
 <p align="center">
     <img src="https://github.com/user-attachments/assets/df0b137a-1fee-4683-b407-440da83e938f" alt="기본 문법" width="80%">
 </p>
 
-**2.2 유용한 패턴**
+- **2.2 유용한 패턴**
 <p align="center">
     <img src="https://github.com/user-attachments/assets/3d27c0b4-fe4f-488f-83de-267e785ac57c" alt="유용한 패턴" width="80%">
 </p>
 
-**2.3 수량연산자**
+- **2.3 수량연산자**
 <p align="center">
     <img src="https://github.com/user-attachments/assets/f23910d2-87c4-4a55-aa86-f2e9594561f5" alt="수량 연산자" width="80%">
 </p>
@@ -93,7 +93,7 @@
   <tbody>
     <tr>
       <td style="padding: 8px; vertical-align: top;">
-        <img src="https://github.com/user-attachments/assets/cdb334c0-5542-4c66-ba5f-7063b3d54706" alt="Table Structure" style="width: 100%;">
+        <img src="https://github.com/user-attachments/assets/cdb334c0-5542-4c66-ba5f-7063b3d54706" alt="Table Structure" style="width: 100%; max-width: 800px;">
       </td>
       <td style="padding: 8px; vertical-align: top;">
         <pre>
@@ -114,6 +114,7 @@ CREATE TABLE stock_trades (
     </tr>
   </tbody>
 </table>
+
 
 #### 💾 2. 30개의 Dummy 데이터를 INSERT 문으로 삽입
 - 트랜잭션 id(transaction_id)에 유효하지 않은 값 3개가 존재
