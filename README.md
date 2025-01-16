@@ -370,7 +370,7 @@ WHERE price - FLOOR(price) != 0;
 ```
 
 <details>
-  <summary>풀이</summary>
+  <summary>🔍 풀이</summary>
 
 ```sql
 SELECT trade_id, price
