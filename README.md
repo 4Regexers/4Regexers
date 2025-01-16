@@ -322,7 +322,7 @@ WHERE trade_type = 'BUY' AND price REGEXP '^[0-9]+\\.[1-9]{1}0$';
 --SQL문
 SELECT stock_symbol, trade_date, price
 FROM stock_trades
-WHERE price >= 100.00 AND price <= 200.00
+WHERE price >= 100.00 AND price <= 200.00;
 ```
 
 <details>
