@@ -64,7 +64,8 @@
 1. 데이터 테이블 설명
 - DDL
 
-![image](https://github.com/user-attachments/assets/b6eee4b0-b243-425c-9081-4c978239e28b)
+![image](https://github.com/user-attachments/assets/cdb334c0-5542-4c66-ba5f-7063b3d54706)
+
 
 ```sql
 CREATE TABLE stock_trades (
@@ -135,6 +136,60 @@ INSERT INTO stock_trades (user_id, stock_symbol, trade_date, trade_type, quantit
 
 ---------------------------------------------------------------------------------------------
 
+1. 잘못된 거래 ID 탐지
+   거래 ID가 T-로 시작하고 뒤에 4자리 숫자가 있는지 확인.
+
+```sql
+--SQL문
+SELECT trade_id, transaction_id
+FROM stock_trades
+WHERE LEFT(transaction_id, 2) != 'T-' 
+   OR LENGTH(transaction_id) != 6 
+   OR NOT (
+       SUBSTRING(transaction_id, 3, 1) BETWEEN '0' AND '9' AND
+       SUBSTRING(transaction_id, 4, 1) BETWEEN '0' AND '9' AND
+       SUBSTRING(transaction_id, 5, 1) BETWEEN '0' AND '9' AND
+       SUBSTRING(transaction_id, 6, 1) BETWEEN '0' AND '9'
+   ); 
+```
+
+<details>
+  <summary>풀이</summary>
+
+```sql
+SELECT trade_id, transaction_id -- trade_id와 transaction_id를 선택한다
+FROM stock_trades -- stock_trades 테이블에서
+WHERE transaction_id NOT REGEXP '^T-[0-9]{4}$'; -- T- 로 시작하며 0~9사이의 4자리수 값을 가지는 항목이 아닌 것을 선택
+```
+
+  
+  **REGEXP** : 정규표현식을 활용한 문자열 검색을 필터링 가능하게 하는 조건문
+
+   
+
+**^** : 문자열 시작
+
+T-:  T- 로 시작하는 문자열을 반환한다
+
+**[0-9]{4}** : 0부터 9까지의 문자열을 {4}를 사용해 4개만 반환한다.
+
+**$** : 문자열의 끝을 의미한다.
+
+![image](https://github.com/user-attachments/assets/bf00be7a-3260-4229-89ae-50f31c19fdb8)
+
+
+</details>
+
+
+
+![image](https://github.com/user-attachments/assets/629e6040-8ca8-4db8-b1e7-3b66bfe2bdbc)
+
+
+
+
+
+------------------------------------------------------
+
 2. 특정 날짜 범위의 거래 필터링
 - `2024-12`로 시작하는 날짜만 포함한 거래 찾기
 
@@ -166,6 +221,7 @@ WHERE trade_date REGEXP '^2024-12';
 
 
 - 출력 결과
+
  ![image](https://github.com/user-attachments/assets/9d931285-359b-4803-afdc-a37a809ac1fb)
 
 ---------------------------------------------------------------------------------------------
