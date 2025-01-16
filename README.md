@@ -112,33 +112,32 @@
 1. 데이터 테이블 설명
 - DDL
 
-![image](https://github.com/user-attachments/assets/cdb334c0-5542-4c66-ba5f-7063b3d54706)
+<table style="border-collapse: collapse; border: none;">
+<tr style="border: none;">
+<td width="50%" style="border: none;">
 
+![Table Structure](https://github.com/user-attachments/assets/cdb334c0-5542-4c66-ba5f-7063b3d54706)
+
+</td>
+<td width="50%" style="border: none;">
 
 ```sql
 CREATE TABLE stock_trades (
-    trade_id INT PRIMARY KEY AUTO_INCREMENT,
-    user_id INT NOT NULL,
-    stock_symbol VARCHAR(10) NOT NULL,
-    trade_date DATETIME NOT NULL,
-    trade_type ENUM('BUY', 'SELL') NOT NULL,
-    quantity INT NOT NULL CHECK (quantity > 0),
-    price DECIMAL(10, 2) NOT NULL CHECK (price > 0),
-    transaction_id VARCHAR(15) NOT NULL
+    trade_id INT PRIMARY KEY AUTO_INCREMENT, --  거래 고유 ID, `INT`, 기본 키, 자동 증가
+    user_id INT NOT NULL, --사용자 ID, `INT`
+    stock_symbol VARCHAR(10) NOT NULL, -- 주식 심볼, `VARCHAR(10)`
+    trade_date DATETIME NOT NULL, -- 거래 날짜 및 시간, `DATETIME`
+    trade_type ENUM('BUY', 'SELL') NOT NULL, -- 거래 유형 (`BUY` 또는 `SELL`)
+    quantity INT NOT NULL CHECK (quantity > 0), -- 거래 수량, `INT`, 양수만 허용
+    price DECIMAL(10, 2) NOT NULL CHECK (price > 0), -- 주당 거래 가격, 양수만 허용
+    transaction_id VARCHAR(15) NOT NULL -- 거래 식별자, `VARCHAR(15)`
 );
 ```
+</td width="50%" style="border: none;">
+</tr style="border: none;">
+</table style="border-collapse: collapse; border: none;">
 
 모든 열은 `NOT NULL` 을 활용하여 필수로 값을 받도록 설정
-
-- **`trade_id`**: 거래 고유 ID, `INT`, 기본 키, 자동 증가.
-- **`user_id`**: 사용자 ID, `INT`
-- **`stock_symbol`**: 주식 심볼, `VARCHAR(10)`
-- **`trade_date`**: 거래 날짜 및 시간, `DATETIME`
-- **`trade_type`**: 거래 유형 (`BUY` 또는 `SELL`), `ENUM` 을 활용하여 buy 혹은 sell 값만 입력되도록 설정
-- **`quantity`**: 거래 수량, `INT`, 양수만 허용
-- **`price`**: 주당 거래 가격, `DECIMAL(10, 2)`, 양수만 허용
-- **`transaction_id`**: 거래 식별자, `VARCHAR(15)`
-
 - DML
 ```sql
 INSERT INTO stock_trades (user_id, stock_symbol, trade_date, trade_type, quantity, price, transaction_id) VALUES
@@ -344,7 +343,8 @@ WHERE trade_type = 'BUY' AND price REGEXP '^[0-9]+\\.[1-9]{1}0$';
 
 **$** : 문자열의 끝을 의미한다.
 
-![image](https://github.com/user-attachments/assets/1cad1f61-d7e1-44f6-b202-74ca90880307)
+![image](https://github.com/user-attachments/assets/c511179d-6310-4a6e-8335-3e8ef728b880)
+
 
 </details>
 
@@ -386,12 +386,15 @@ WHERE price REGEXP '^1[0-9]{2}\\.\\d{2}$|^200\\.00$';
 
 $ : 문자열의 끝을 의미한다.
 
-![image](https://github.com/user-attachments/assets/396200ea-aedf-4bba-b16e-837b0016d442)
+![image](https://github.com/user-attachments/assets/ef8ec8d9-5448-4250-a122-9e69242c6959)
+
+
 
 </details>
 
   
-![image](https://github.com/user-attachments/assets/589ba2d9-2d34-4757-9827-7235d68cdeb5)
+![image](https://github.com/user-attachments/assets/58f0787c-1146-4557-90b4-9ed72a5e2ffb)
+
 
 ---------------------------------------------------------------------------------------------
 
@@ -428,7 +431,8 @@ WHERE price NOT REGEXP '^[0-9]+\\.(00)$';
 
 **$** : 문자열의 끝을 의미
 
-![image](https://github.com/user-attachments/assets/def21483-4096-49d5-b3bf-312914cacbf9)
+![image](https://github.com/user-attachments/assets/03c218e6-a5e0-475d-b46c-4be89dfaacc1)
+
 
 
 
@@ -437,7 +441,8 @@ WHERE price NOT REGEXP '^[0-9]+\\.(00)$';
 </details>
 
 
-![image](https://github.com/user-attachments/assets/ef05a855-9b47-49df-a970-8c7984a835f2)
+![image](https://github.com/user-attachments/assets/f6c437ec-4c5d-4cbb-a31a-2d2d8257497d)
+
 
 
 ## 업무 7. 오전/오후 거래 구분
