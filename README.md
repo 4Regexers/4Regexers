@@ -63,10 +63,10 @@
     - 가상머신(VM)이 **호스트 시스템과 동일한 네트워크에 연결되도록 구성**하는 방식 → 가상머신이 물리적인 네트워크 장치와 직접 통신할 수 있는 환경을 제공
         - 가상머신은 호스트와 동일한 네트워크 내에서 **독립된 장치처럼 동작**
         
-        ![image.png](image.png)
+        ![image](https://github.com/user-attachments/assets/258ffda3-7d76-4c73-81cf-2873e6d44d7f)
+
         
 
-![image.png](image%201.png)
 
 1. 데이터베이스 구축 
 - - root 계정에서 공동 계정 생성 
@@ -78,7 +78,8 @@ GRANT ALL PRIVILEGES ON main.* TO '4Regexers'@'%';
 FLUSH PRIVILEGES;
 - 연결
 
-![image.png](image%202.png)
+![image](https://github.com/user-attachments/assets/94a06751-e04f-469b-9617-f3ddad253e1e)
+
 
 ## 2. 정규표현식 사용 목적  및 활용법 `<각자>`
 
@@ -96,13 +97,15 @@ FLUSH PRIVILEGES;
         
         
         - 기본 문법
-        
+        ![image](https://github.com/user-attachments/assets/df0b137a-1fee-4683-b407-440da83e938f)
+
         
         - 유용한 패턴
-        
+        ![image](https://github.com/user-attachments/assets/3d27c0b4-fe4f-488f-83de-267e785ac57c)
+
         
         - 수량연산자
-           
+        ![image](https://github.com/user-attachments/assets/f23910d2-87c4-4a55-aa86-f2e9594561f5)
 
 ## 📂 프로젝트 구조
 
