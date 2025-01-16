@@ -135,49 +135,80 @@ INSERT INTO stock_trades (user_id, stock_symbol, trade_date, trade_type, quantit
 
 ---------------------------------------------------------------------------------------------
 
-1. 잘못된 거래 ID 탐지
-   거래 ID가 T-로 시작하고 뒤에 4자리 숫자가 있는지 확인.
+2. 특정 날짜 범위의 거래 필터링
+- `2024-12`로 시작하는 날짜만 포함한 거래 찾기
 
 ```sql
 --SQL문
-SELECT trade_id, transaction_id
+SELECT trade_id, trade_date, stock_symbol
 FROM stock_trades
-WHERE LEFT(transaction_id, 2) != 'T-' 
-   OR LENGTH(transaction_id) != 6 
-   OR NOT (
-       SUBSTRING(transaction_id, 3, 1) BETWEEN '0' AND '9' AND
-       SUBSTRING(transaction_id, 4, 1) BETWEEN '0' AND '9' AND
-       SUBSTRING(transaction_id, 5, 1) BETWEEN '0' AND '9' AND
-       SUBSTRING(transaction_id, 6, 1) BETWEEN '0' AND '9'
-   ); 
+WHERE trade_date LIKE '2024-12%';
 ```
 
 <details>
   <summary>풀이</summary>
 
 ```sql
-SELECT trade_id, transaction_id -- trade_id와 transaction_id를 선택한다
-FROM stock_trades -- stock_trades 테이블에서
-WHERE transaction_id NOT REGEXP '^T-[0-9]{4}$'; -- T- 로 시작하며 0~9사이의 4자리수 값을 가지는 항목이 아닌 것을 선택
+SELECT trade_id, trade_date, stock_symbol
+FROM stock_trades
+WHERE trade_date REGEXP '^2024-12';
 ```
 
-  
-  **REGEXP** : 정규표현식을 활용한 문자열 검색을 필터링 가능하게 하는 조건문
+**REGEXP** : 정규표현식을 활용한 문자열 검색을 필터링 가능하게 하는 조건문
 
-   
+`^` : 문자열의 시작
 
-**^** : 문자열 시작
+`2024-12` : 고정된 텍스트로 대상 문자열이 “2024-12”로 시작하는 경우 일치
 
-T-:  T- 로 시작하는 문자열을 반환한다
-
-**[0-9]{4}** : 0부터 9까지의 문자열을 {4}를 사용해 4개만 반환한다.
-
-**$** : 문자열의 끝을 의미한다.
-
-![image](https://github.com/user-attachments/assets/bec9ae52-5aae-46d3-b797-56268ae07e43)
+![image](https://github.com/user-attachments/assets/1a36ae43-be28-4166-8814-b7c04e74c3bb)
 
 </details>
 
+
+- 출력 결과
+ ![image](https://github.com/user-attachments/assets/9d931285-359b-4803-afdc-a37a809ac1fb)
+
+---------------------------------------------------------------------------------------------
+
+3. 주식 심볼 형식 필터링 
+- 주식 심볼이 1~5자의 영문 대문자로만 구성되었는지 확인
+
+```sql
+--SQL문
+SELECT trade_id, stock_symbol
+FROM stock_trades
+WHERE LENGTH(stock_symbol) < 1
+   OR LENGTH(stock_symbol) > 5
+   OR NOT (
+       SUBSTRING(stock_symbol, 1, 1) BETWEEN 'A' AND 'Z'
+       AND (LENGTH(stock_symbol) < 2 OR SUBSTRING(stock_symbol, 2, 1) BETWEEN 'A' AND 'Z')
+       AND (LENGTH(stock_symbol) < 3 OR SUBSTRING(stock_symbol, 3, 1) BETWEEN 'A' AND 'Z')
+       AND (LENGTH(stock_symbol) < 4 OR SUBSTRING(stock_symbol, 4, 1) BETWEEN 'A' AND 'Z')
+       AND (LENGTH(stock_symbol) < 5 OR SUBSTRING(stock_symbol, 5, 1) BETWEEN 'A' AND 'Z')
+   );
+```
+
+<details>
+  <summary>풀이</summary>
+
+```sql
+SELECT trade_id, stock_symbol
+FROM stock_trades
+WHERE stock_symbol NOT REGEXP '^[A-Z]{1,5}$';
+```
+- ^ : 문자열의 시작
+- [A-Z] : 대문자 알파벳(A~Z)의 하나의 문자와 일치
+- {1,5} : 바로 앞의 [A-Z] 대문자 범위에 대해 **1개 이상, 최대 5개까지**의 반복을 허용한다. 따라서 문자열이 1~5개의 대문자로 구성되어야한다.
+- $ ****: 문자열의 끝
+- ^[A-Z]{1,5}$ : 문자열은 반드시 1~5개의 대문자 알파벳만 포함되어야하고, 그외의 문자(숫자, 소문자, 특수문자 등)가 포함되거나 대문자 알파벳이 5개를 초과하는 경우는 허용 하지 않는다.
+
+![image](https://github.com/user-attachments/assets/604718bf-894e-4b35-87a1-296428483af3)
+</details>
+
+
+- 출력 결과
+  
+![image](https://github.com/user-attachments/assets/0628daeb-ccbd-494e-ab9b-0e89651d1c8a)
 
 
 
