@@ -210,6 +210,91 @@ WHERE stock_symbol NOT REGEXP '^[A-Z]{1,5}$';
   
 ![image](https://github.com/user-attachments/assets/0628daeb-ccbd-494e-ab9b-0e89651d1c8a)
 
+---------------------------------------------------------------------------------------------
+
+4. 잘못된 거래 유형 탐지 
+- "BUY" 거래 중에서 거래 가격(price)이 소수점 1자리만 있는 거래를 찾으세요.
+
+```sql
+--SQL문
+SELECT * 
+FROM stock_trades
+WHERE trade_type = 'BUY' 
+  AND price - FLOOR(price) BETWEEN 0.1 AND 0.9
+  AND (price - FLOOR(price)) * 10 = FLOOR((price - FLOOR(price)) * 10);
+```
+
+<details>
+  <summary>풀이</summary>
+
+```sql
+SELECT * FROM stock_trades
+WHERE trade_type = 'BUY' AND price REGEXP '^[0-9]+\\.[1-9]{1}0$';
+```
+REGEXP ****: 정규표현식을 활용한 문자열 검색을 필터링 가능하게 하는 조건문
+
+^ : 문자열 시작
+
+[0-9]+: 0부터 9까지의 문자열을 반환, 뒤에 +를 붙여서 한번 이상 반복하는 연속적인 문자열을 전부 반환
+
+\\. : 소수점을 그대로 반환
+
+[1-9]{1}0 : 1부터 9까지의 문자열을 {1}를 사용해 1개만 반환 후 0 출력
+
+$ : 문자열의 끝을 의미한다.
+
+![image](https://github.com/user-attachments/assets/1cad1f61-d7e1-44f6-b202-74ca90880307)
+
+</details>
+
+
+- 출력 결과
+  
+![image](https://github.com/user-attachments/assets/baafa0b7-5663-40e1-8fd0-27696e623aaa)
+
+
+---------------------------------------------------------------------------------------------
+
+5. 특정 가격 범위 거래 탐지
+- 가격이 $100.00에서 $200.00 사이인 거래만 선택.
+
+```sql
+--SQL문
+SELECT trade_id, price
+FROM stock_trades
+WHERE price >= 100.00 AND price <= 200.00
+```
+
+<details>
+  <summary>풀이</summary>
+
+```sql
+SELECT trade_id, price
+FROM stock_trades
+WHERE price REGEXP '^1[0-9]{2}\\.\\d{2}$|^200\\.00$';
+```
+REGEXP : 정규표현식을 활용한 문자열 검색을 필터링 가능하게 하는 조건문
+
+^ : 문자열 시작
+
+1[0-9]{2}: 1 반환, 0부터 9까지의 숫자 중 뒤에 {2}를 사용해 2개만 반환
+
+\\. : 소수점을 그대로 반환한다.
+
+\\d{2} : 0부터 9까지의 숫자 중 뒤에 {2}를 사용해 2개만 반환
+
+200\\.00 : 200.00 을 표현
+
+$ : 문자열의 끝을 의미한다.
+
+![image](https://github.com/user-attachments/assets/396200ea-aedf-4bba-b16e-837b0016d442)
+
+</details>
+
+
+- 출력 결과
+  
+![image](https://github.com/user-attachments/assets/c4cb04c9-c090-4efb-8faa-ab6b729f8073)
 
 
 
