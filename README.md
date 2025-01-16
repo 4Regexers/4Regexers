@@ -286,7 +286,7 @@ WHERE trade_type = 'BUY'
 ```
 
 <details>
-  <summary>풀이</summary>
+  <summary>🔍 풀이</summary>
 
 ```sql
 SELECT * FROM stock_trades
@@ -326,7 +326,7 @@ WHERE price >= 100.00 AND price <= 200.00
 ```
 
 <details>
-  <summary>풀이</summary>
+  <summary>🔍 풀이</summary>
 
 ```sql
 SELECT stock_symbol, trade_date, price
@@ -417,7 +417,7 @@ WHERE HOUR(trade_date) BETWEEN 9 AND 11
 ```
 
 <details>
-  <summary>풀이</summary>
+  <summary>🔍 풀이</summary>
 
 ```sql
 SELECT trade_id, trade_date, stock_symbol
