@@ -273,58 +273,55 @@ WHERE stock_symbol NOT REGEXP '^[A-Z]{1,5}$';
 
 ---------------------------------------------------------------------------------------------
 
-## 업무 4. 거래 유형 탐지 
-까다로운 부장님이 특별한 업무를 지시하였다. "BUY" 거래 중에서 거래 가격(price)이 소수점 1자리만 있는 거래를 찾아야 한다.
+### 업무 4. 거래 유형 탐지 
+- 까다로운 부장님이 특별한 업무를 지시하였다. **"BUY" 거래 중에서 거래 가격(price)이 소수점 1자리만 있는 거래**를 찾아야 한다.
+<p align="center">
+    <img src="https://github.com/user-attachments/assets/baafa0b7-5663-40e1-8fd0-27696e623aaa" alt="image">
+</p>
 
 ```sql
---SQL문
+-- 정규표현식을 사용하지 않았을 경우 SQL문 
 SELECT * 
 FROM stock_trades
 WHERE trade_type = 'BUY' 
   AND price - FLOOR(price) BETWEEN 0.1 AND 0.9
   AND (price - FLOOR(price)) * 10 = FLOOR((price - FLOOR(price)) * 10);
 ```
-
+<br>
 <details>
   <summary>🔍 풀이</summary>
-
+   
 ```sql
 SELECT * FROM stock_trades
 WHERE trade_type = 'BUY' AND price REGEXP '^[0-9]+\\.[1-9]{1}0$';
 ```
-**REGEXP**: 정규표현식을 활용한 문자열 검색을 필터링 가능하게 하는 조건문
 
-**^** : 문자열 시작
+- **`REGEXP`** : 정규표현식을 활용한 문자열 검색을 필터링 가능하게 하는 조건문
+- **`[0-9]+`** : 0부터 9까지의 문자열을 반환, 뒤에 +를 붙여서 한번 이상 반복하는 연속적인 문자열을 전부 반환
+- **`\\.`** : 소수점을 그대로 반환
+- **`[1-9]{1}0`** : 1부터 9까지의 문자열을 {1}를 사용해 1개만 반환 후 0 출력
+- **`$`** : 문자열의 끝을 의미
 
-**[0-9]+**: 0부터 9까지의 문자열을 반환, 뒤에 +를 붙여서 한번 이상 반복하는 연속적인 문자열을 전부 반환
-
-**\\.** : 소수점을 그대로 반환
-
-**[1-9]{1}0** : 1부터 9까지의 문자열을 {1}를 사용해 1개만 반환 후 0 출력
-
-**$** : 문자열의 끝을 의미
-
-![image](https://github.com/user-attachments/assets/c511179d-6310-4a6e-8335-3e8ef728b880)
-
-
+<p align="center">
+    <img src="https://github.com/user-attachments/assets/c511179d-6310-4a6e-8335-3e8ef728b880" alt="image">
+</p>
 </details>
-
-  
-![image](https://github.com/user-attachments/assets/baafa0b7-5663-40e1-8fd0-27696e623aaa)
-
 
 ---------------------------------------------------------------------------------------------
 
-## 업무 5. 특정 가격 범위 거래
-   가진 재산이 $200.00인 고객이 $100.00이상의 주식 중 자신이 구매 가능한 종목을 문의 하였다. 거래기록을 기반으로 매수 가능 거래의 주식 심볼, 거래일자, 가격을 확인하여라.
+### 업무 5. 특정 가격 범위 거래
+- **가진 재산이 $200.00인 고객이 $100.00이상의 주식 중 자신이 구매 가능한 종목을 문의** 하였다. 거래기록을 기반으로 매수 가능 거래의 주식 심볼, 거래일자, 가격을 확인하여라.
+<p align="center">
+    <img src="https://github.com/user-attachments/assets/58f0787c-1146-4557-90b4-9ed72a5e2ffb" alt="image">
+</p>
 
 ```sql
---SQL문
+-- 정규표현식을 사용하지 않았을 경우 SQL문 
 SELECT stock_symbol, trade_date, price
 FROM stock_trades
 WHERE price >= 100.00 AND price <= 200.00;
 ```
-
+<br>
 <details>
   <summary>🔍 풀이</summary>
 
@@ -333,29 +330,18 @@ SELECT stock_symbol, trade_date, price
 FROM stock_trades
 WHERE price REGEXP '^1[0-9]{2}\\.\\d{2}$|^200\\.00$';
 ```
-**REGEXP** : 정규표현식을 활용한 문자열 검색을 필터링 가능하게 하는 조건문
+- **`REGEXP`** : 정규표현식을 활용한 문자열 검색을 필터링 가능하게 하는 조건문
+- **`^`** : 문자열 시작
+- **`1[0-9]{2}`**: 1 반환, 0부터 9까지의 숫자 중 뒤에 {2}를 사용해 2개만 반환
+- **`\\.`** : 소수점을 그대로 반환
+- **`\\d{2}`** : 0부터 9까지의 숫자 중 뒤에 {2}를 사용해 2개만 반환
+- **`200\\.00`** : 200.00 을 표현
+- **`$`** : 문자열의 끝을 의미
 
-**^** : 문자열 시작
-
-**1[0-9]{2}**: 1 반환, 0부터 9까지의 숫자 중 뒤에 {2}를 사용해 2개만 반환
-
-**\\.** : 소수점을 그대로 반환
-
-**\\d{2}** : 0부터 9까지의 숫자 중 뒤에 {2}를 사용해 2개만 반환
-
-**200\\.00** : 200.00 을 표현
-
-$ : 문자열의 끝을 의미
-
-![image](https://github.com/user-attachments/assets/ef8ec8d9-5448-4250-a122-9e69242c6959)
-
-
-
+<p align="center">
+    <img src="https://github.com/user-attachments/assets/ef8ec8d9-5448-4250-a122-9e69242c6959" alt="image">
+</p>
 </details>
-
-  
-![image](https://github.com/user-attachments/assets/58f0787c-1146-4557-90b4-9ed72a5e2ffb)
-
 
 ---------------------------------------------------------------------------------------------
 
