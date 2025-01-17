@@ -365,10 +365,13 @@ WHERE price REGEXP '^1[0-9]{2}\\.\\d{2}$|^200\\.00$';
 ---------------------------------------------------------------------------------------------
 
 ## 업무 6. 가격 범위에 따른 거래 필터링
-더욱 까다로운 과장님이 다음 거래에서는 1달러 이하의 금액(센트)을 남기고 싶다고 하신다.  가격이 소수점으로 끝나는 거래만 선택해보자.
+더욱 까다로운 과장님이 다음 거래에서는 1달러 이하의 금액(센트)을 남기고 싶다고 하신다.  **가격이 소수점으로 끝나는 거래**만 선택해보자.
+<p align="center">
+   <img src = "https://github.com/user-attachments/assets/f6c437ec-4c5d-4cbb-a31a-2d2d8257497d" alt="image">
+</p>
 
 ```sql
-
+-- 정규표현식을 사용하지 않았을 경우 SQL문 
 SELECT trade_id, price
 FROM stock_trades
 WHERE price - FLOOR(price) != 0;
@@ -397,24 +400,24 @@ WHERE price NOT REGEXP '^[0-9]+\\.(00)$';
 
 - **`$`** : 문자열의 끝을 의미
 
-![image](https://github.com/user-attachments/assets/03c218e6-a5e0-475d-b46c-4be89dfaacc1)
 
 
-
-
-
-
+<p align="center">
+    <img src="https://github.com/user-attachments/assets/03c218e6-a5e0-475d-b46c-4be89dfaacc1" alt="image">
+</p>
 </details>
 
 
-![image](https://github.com/user-attachments/assets/f6c437ec-4c5d-4cbb-a31a-2d2d8257497d)
 
 
 
 ## 업무 7. 오전/오후 거래 구분
    오전 주식시장의 동향을 파악하기 위해 오전(09:00 ~ 12:00) 시간대에 거래된 데이터만 출력하도록 하자.
-
+<p align="center">
+   <img src = "https://github.com/user-attachments/assets/7ba67f37-7d48-4a2f-827f-f57cfe0992b0" alt="image">
+</p>
 ```sql
+-- 정규표현식을 사용하지 않았을 경우 SQL문
 SELECT trade_id, trade_date, stock_symbol
 FROM stock_trades
 WHERE HOUR(trade_date) BETWEEN 9 AND 11
@@ -440,15 +443,13 @@ WHERE trade_date REGEXP ' (09|1[0-1]):[0-5][0-9]:[0-5][0-9]$'
 
 오전 시간대는 00:00:00 부터 12:00:00 까지 이다. 따라서 hh부분은(09|1[0-1])를 이용해 9시부터 11시까지를, mm 부분은 [0-5][0-9]를 이용해 00분부터 59까지를 ss부분은 00초부터 59초까지를 출력하고, 여기서 추가로 12:00:00까지 필터링하도록 한다.
 
-![image](https://github.com/user-attachments/assets/720170bd-64e0-45ee-a5d3-bfdbd62637c9)
 
 
-
-
-
+<p align="center">
+    <img src="https://github.com/user-attachments/assets/720170bd-64e0-45ee-a5d3-bfdbd62637c9">
+</p>
 </details>
 
-![image2](https://github.com/user-attachments/assets/7ba67f37-7d48-4a2f-827f-f57cfe0992b0)
 
 
 ## 🤸‍♂️ 팀원 소개
