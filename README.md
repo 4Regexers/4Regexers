@@ -39,22 +39,41 @@
 </p>
 
 #### 🛠️ 2. 데이터베이스 구축
-
-#### 2.1. 공동 계정 생성
-- **Root 계정에서 새로운 계정 생성**
+#### 2.1 데이터베이스 생성 
+- root 계정으로 접속
+    ```sql
+    CREATE DATABASE main;
+    ```
+#### 2.2 각자에 해당하는 외부 접속 유저 생성
 - `%`로 설정하면 모든 호스트에서 접근 가능
     ```sql
-    CREATE USER '4Regexers'@'%' IDENTIFIED BY '4Regexers';
+    CREATE USER '4Regexers01'@'%' IDENTIFIED BY '4Regexers01';
+    CREATE USER '4Regexers02'@'%' IDENTIFIED BY '4Regexers02';
+    CREATE USER '4Regexers03'@'%' IDENTIFIED BY '4Regexers03';
+    CREATE USER '4Regexers04'@'%' IDENTIFIED BY '4Regexers04';
     ```
 
-#### 2.2. 특정 데이터베이스(main) 접근 권한 부여
+#### 2.3 특정 데이터베이스(main) 접근 권한 부여
 - 특정 데이터베이스(main)에만 접근 권한 부여
     ```sql
-    GRANT ALL PRIVILEGES ON main.* TO '4Regexers'@'%';
+    GRANT ALL PRIVILEGES ON main.* TO '4Regexers01'@'%';
+    GRANT ALL PRIVILEGES ON main.* TO '4Regexers02'@'%';
+    GRANT ALL PRIVILEGES ON main.* TO '4Regexers03'@'%';
+    GRANT ALL PRIVILEGES ON main.* TO '4Regexers04'@'%';
     FLUSH PRIVILEGES; -- 변경사항 적용
     ```
 
-#### 2.3. DBeaver 연결
+#### 2.4 MySQL 서버가 원격에서 접근 허용
+   ```sql
+    sudo vi /etc/mysql/mysql.conf.d/mysqld.cnf
+
+    [mysqld]
+    bind-address = 0.0.0.0
+
+    sudo systemctl restart mysql -- 재시작
+   ```
+
+#### 2.5 DBeaver 연결
 - 위에서 생성한 계정을 사용하여 **DBeaver**로 원격 연결
 <p align="center">
     <img src="https://github.com/user-attachments/assets/94a06751-e04f-469b-9617-f3ddad253e1e" alt="DBeaver 연결" width="70%">
