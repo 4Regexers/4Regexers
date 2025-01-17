@@ -102,37 +102,8 @@
 
 ### 3️⃣ 주식 거래 DB 
 #### 🗂️ 1. Table(stock_trades) 정의
-<table style="border-collapse: collapse; width: 100%; text-align: left;">
-  <thead>
-    <tr>
-      <th style="width: 50%; border-bottom: 2px solid #ddd; padding: 8px;">ERD</th>
-      <th style="width: 50%; border-bottom: 2px solid #ddd; padding: 8px;">DDL</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="padding: 8px; vertical-align: top;">
-        <img src="https://github.com/user-attachments/assets/cdb334c0-5542-4c66-ba5f-7063b3d54706" alt="Table Structure" style="width: 100%; max-width: 800px;">
-      </td>
-      <td style="padding: 8px; vertical-align: top;">
-        <pre>
-<code>
-CREATE TABLE stock_trades (
-    trade_id INT PRIMARY KEY AUTO_INCREMENT, -- 거래 고유 ID, `INT`, 기본 키, 자동 증가
-    user_id INT NOT NULL, -- 사용자 ID, `INT`
-    stock_symbol VARCHAR(10) NOT NULL, -- 주식 심볼, `VARCHAR(10)`
-    trade_date DATETIME NOT NULL, -- 거래 날짜 및 시간, `DATETIME`
-    trade_type ENUM('BUY', 'SELL') NOT NULL, -- 거래 유형 (`BUY` 또는 `SELL`)
-    quantity INT NOT NULL CHECK (quantity > 0), -- 거래 수량, `INT`, 양수만 허용
-    price DECIMAL(10, 2) NOT NULL CHECK (price > 0), -- 주당 거래 가격, 양수만 허용
-    transaction_id VARCHAR(15) NOT NULL -- 거래 식별자, `VARCHAR(15)`
-);
-</code>
-        </pre>
-      </td>
-    </tr>
-  </tbody>
-</table>
+![image](https://github.com/user-attachments/assets/ebbff0ed-ce0a-4a02-a2ca-77f4fbe00fbd)
+
 
 
 #### 💾 2. 30개의 Dummy 데이터를 INSERT 문으로 삽입
