@@ -1,5 +1,6 @@
 ## DB 연동 및 정규표현식 실습 Guide
 
+
 ## 💡 목표 
 **1. 여러 사용자가 하나의 데이터베이스를 활용할 수 있는 환경 구축**
    - DB 계정 생성
@@ -17,6 +18,42 @@
 > 지훈이는 증권사에 입사한 첫날이다. 첫 업무로 주식 거래 데이터베이스를 검증하고 필요한 정보를 추출하는 일을 맡게 되었다.
 
 > **아래 주어진 7가지 업무들을 해결하기 위해 주어진 실습 가이드를 참고**하여 공유 데이터베이스에서 **정규표현식을 활용한 SELECT 문**을 구성해보자.
+
+## 🤸‍♂️ 팀원 소개
+<table>
+  <tbody>
+    <tr>
+      <td align="center">
+        <a href="https://github.com/parkjhhh">
+          <img src="https://avatars.githubusercontent.com/u/153366521?v=4" width="150px;" alt="박지혜"/>
+          <br /><sub><b> 박지혜 </b></sub>
+        </a>
+        <br />
+      </td>
+      <td align="center">
+        <a href="https://github.com/JaeHee-devSpace">
+          <img src="https://avatars.githubusercontent.com/u/193316939?v=4" width="150px;" alt="박재희"/>
+          <br /><sub><b> 박재희 </b></sub>
+        </a>
+        <br />
+      </td>
+      <td align="center">
+        <a href="https://github.com/wild-turkey">
+          <img src="https://github.com/user-attachments/assets/0596f1ff-ab90-49f0-9dd4-c306c63a397b" width="150px;" alt="김지훈"/>
+          <br /><sub><b> 김지훈 </b></sub>
+        </a>
+        <br />
+      </td>
+      <td align="center">
+        <a href="https://github.com/riyeong0916">
+          <img src="https://avatars.githubusercontent.com/u/193798531?v=4" width="150px;" alt="김리영"/>
+          <br /><sub><b> 김리영 </b></sub>
+        </a>
+        <br />
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 ## 🛠️ 기술 스택
 <div style="text-align: left;"> 
@@ -425,42 +462,6 @@ WHERE trade_date REGEXP ' (09|1[0-1]):[0-5][0-9]:[0-5][0-9]$'
 
 ---------------------------------------------------------------------------------------------
 
-
-## 🤸‍♂️ 팀원 소개
-<table>
-  <tbody>
-    <tr>
-      <td align="center">
-        <a href="https://github.com/parkjhhh">
-          <img src="https://avatars.githubusercontent.com/u/153366521?v=4" width="150px;" alt="박지혜"/>
-          <br /><sub><b> 박지혜 </b></sub>
-        </a>
-        <br />
-      </td>
-      <td align="center">
-        <a href="https://github.com/JaeHee-devSpace">
-          <img src="https://avatars.githubusercontent.com/u/193316939?v=4" width="150px;" alt="박재희"/>
-          <br /><sub><b> 박재희 </b></sub>
-        </a>
-        <br />
-      </td>
-      <td align="center">
-        <a href="https://github.com/wild-turkey">
-          <img src="https://github.com/user-attachments/assets/0596f1ff-ab90-49f0-9dd4-c306c63a397b" width="150px;" alt="김지훈"/>
-          <br /><sub><b> 김지훈 </b></sub>
-        </a>
-        <br />
-      </td>
-      <td align="center">
-        <a href="https://github.com/riyeong0916">
-          <img src="https://avatars.githubusercontent.com/u/193798531?v=4" width="150px;" alt="김리영"/>
-          <br /><sub><b> 김리영 </b></sub>
-        </a>
-        <br />
-      </td>
-    </tr>
-  </tbody>
-</table>
 
 
 
